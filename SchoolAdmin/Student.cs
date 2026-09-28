@@ -23,5 +23,14 @@ namespace SchoolAdmin
         {
             return (byte)(Courses.Count * 10);
         }
+
+        public void RegisterForCourse(string course)
+        {
+            if (!Courses.Contains(course))
+            {
+                Courses.Add(course);
+            }
+        }
+
     }
 }

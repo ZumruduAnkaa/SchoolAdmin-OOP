@@ -30,14 +30,14 @@
             said.Name = "Said Aziz";
             said.Birthdate = new DateTime(2000, 6, 1);
             said.StudentNumber = Student.StudentCounter++;
-            said.Courses.Add("Programmeren");
-            said.Courses.Add("Databanken");
+            said.RegisterForCourse("Programmeren");
+            said.RegisterForCourse("Databanken");
 
             Student mieke = new Student();
             mieke.Name = "Mieke Vermeulen";
             mieke.Birthdate = new DateTime(1998, 1, 1);
             mieke.StudentNumber = Student.StudentCounter++;
-            mieke.Courses.Add("Communicatie");
+            mieke.RegisterForCourse("Communicatie");
 
             Console.WriteLine(said.GenerateNameCard());
             Console.WriteLine(said.DetermineWorkLoad());
