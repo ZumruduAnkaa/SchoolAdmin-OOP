@@ -14,6 +14,24 @@ namespace SchoolAdmin
 
         public static uint StudentCounter = 1;
 
+
+        private int age;
+
+        public int Age
+        {
+            get 
+            {
+                DateTime today = DateTime.Today;
+
+                int years = today.Year - Birthdate.Year;
+                if (Birthdate.Date > today.AddYears(-age)) age--;
+                return age;
+            }        
+        }
+
+
+
+
         public string GenerateNameCard()
         {
             return $"{Name} (Student)";
