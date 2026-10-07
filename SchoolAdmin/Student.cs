@@ -12,6 +12,9 @@ namespace SchoolAdmin
         public uint StudentNumber;
         private List<string> Courses = new List<string>();
 
+        private List<CourseResult> results = new List<CourseResult>();
+
+
         public static uint StudentCounter = 1;
 
 
@@ -48,6 +51,13 @@ namespace SchoolAdmin
             {
                 Courses.Add(course);
             }
+        }
+
+        //H12_3
+        public void RegisterCourseResult(string name, byte result)
+        {
+            CourseResult courseResult = new CourseResult(name, result);
+            results.Add(courseResult);
         }
 
     }

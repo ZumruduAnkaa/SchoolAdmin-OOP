@@ -6,17 +6,16 @@ namespace SchoolAdmin
 {
     internal class CourseResult
     {
-		private int name;
+		private string name;
 
-		public int Name
+		public string Name
 		{
 			get { return name; }
-			set { name = value; }
 		}
 
-		private int result;
+		private byte result;
 
-		public int Result
+		public byte Result
 		{
 			get { return result; }
 			set 
@@ -32,5 +31,11 @@ namespace SchoolAdmin
             }
 		}
 
-	}
+        public CourseResult(string name, byte result)
+        {
+            this.name = name;
+            Result = result;
+        }
+
+    }
 }

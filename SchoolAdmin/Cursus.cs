@@ -7,7 +7,7 @@ namespace SchoolAdmin
     public class Cursus
     {
         public string Title;
-        public List<Student> Students = new List<Student>();
+        public List<Student> Students;
 
         private byte creditPoints;
 
@@ -17,7 +17,7 @@ namespace SchoolAdmin
             private set { creditPoints = value; }
         }
 
-        private int id = maxId;
+        private int id;
         public int Id
         {
             get { return id; }
@@ -27,9 +27,34 @@ namespace SchoolAdmin
 
         public static List<Cursus> AllCourses = new List<Cursus>();
 
+        // H12_2
+        public Cursus(string title, List<Student> students, byte creditPoints)
+        {
+            Title = title;
+            Students = students;
+            CreditPoints = creditPoints;
+
+            id = maxId;
+            maxId++;
+
+            AllCourses.Add(this);
+        }
+
+        public Cursus(string title, List<Student> students) : this(title, students, 3)
+        {
+        }
+
+        public Cursus(string title) : this(title, new List<Student>())
+        {
+        }
+
         public void ShowOverview()
         {
-            
+            Console.WriteLine($"{Title} ({Id}) ({CreditPoints} stp)");
+            foreach (Student student in Students)
+            {
+                Console.WriteLine(student.Name);
+            }
         }
 
 
