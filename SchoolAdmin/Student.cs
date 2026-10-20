@@ -18,8 +18,6 @@ namespace SchoolAdmin
         public static uint StudentCounter = 1;
 
 
-        private int age;
-
         public int Age
         {
             get 
@@ -27,8 +25,11 @@ namespace SchoolAdmin
                 DateTime today = DateTime.Today;
 
                 int years = today.Year - Birthdate.Year;
-                if (Birthdate.Date > today.AddYears(-age)) age--;
-                return age;
+                if (Birthdate.Date > today.AddYears(-years))
+                {
+                    years--;
+                }
+                return years;
             }        
         }
 
@@ -58,6 +59,38 @@ namespace SchoolAdmin
         {
             CourseResult courseResult = new CourseResult(name, result);
             results.Add(courseResult);
+        }
+
+        //H12_4
+        public double Average()
+        {
+            if (results.Count == 0)
+            {
+                return 0;
+            }
+
+            double sum = 0;
+            foreach (CourseResult result in results)
+            {
+                sum += result.Result;
+            }
+            return sum / results.Count;
+        }
+
+        //H12_4
+        public void ShowOverview()
+        {
+            Console.WriteLine($"{Name}, {Age} jaar");
+            Console.WriteLine();
+            Console.WriteLine("Cijferrapport:");
+            Console.WriteLine("**********");
+
+            foreach (var result in results)
+            {
+                Console.WriteLine($"{(result.Name + ":").PadRight(16)}{result.Result}");
+            }
+
+            Console.WriteLine($"{"Gemiddelde".PadRight(16)}{Average():F1}");
         }
 
     }

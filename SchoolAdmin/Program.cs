@@ -7,6 +7,7 @@
             Console.WriteLine("Wat wil je doen?");
             Console.WriteLine("1. DemonstreerStudenten uitvoeren");
             Console.WriteLine("2. DemonstreerCursussen uitvoeren");
+            Console.WriteLine("3. Student uit tekstformaat inlezen");
             Console.Write(">");
             string keuze = Console.ReadLine();
 
@@ -18,6 +19,10 @@
 
                 case "2":
                     DemoCourses();
+                    break;
+
+                case "3":
+                    ReadTextFormatStudent();
                     break;
 
                 default:
@@ -92,6 +97,42 @@
             programmeren.ShowOverview();
             webtechnologie.ShowOverview();
             databanken.ShowOverview();
+        }
+
+        //H12_4
+        private static void ReadTextFormatStudent()
+        {
+            //Tekst inlezen
+            Console.WriteLine("Geef de tekstvoorstelling van 1 student in CSV-formaat:");
+            Console.WriteLine(">");
+            string input = Console.ReadLine();
+
+            //Opsplitsen van puntkomma
+            string[] parts = input.Split(';');
+
+            //Naam een geboortedatum
+            string name = parts[0];
+            int day = int.Parse(parts[1]);
+            int month = int.Parse(parts[2]);
+            int year = int.Parse(parts[3]);
+
+            //Nieuwe student
+            Student student = new Student();
+            student.Name = name;
+            student.Birthdate = new DateTime(year, month, day);
+            student.StudentNumber = Student.StudentCounter++;
+
+            //Cursussen
+            for (int i = 4; i < parts.Length; i += 2)
+            {
+                string courseName = parts[i];
+                byte result = byte.Parse(parts[i + 1]);
+                student.RegisterCourseResult(courseName, result);
+            }
+
+            Console.WriteLine();
+            student.ShowOverview();
+
         }
     }
 }
