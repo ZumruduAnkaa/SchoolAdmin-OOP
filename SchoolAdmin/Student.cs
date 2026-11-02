@@ -55,9 +55,9 @@ namespace SchoolAdmin
         }
 
         //H12_3
-        public void RegisterCourseResult(string name, byte? result)
+        public void RegisterCourseResult(Cursus course, byte? result)
         {
-            CourseRegistration courseRegistration = new CourseRegistration(name, result);
+            CourseRegistration courseRegistration = new CourseRegistration(course, result);
             courseRegistrations.Add(courseRegistration);
         }
 
@@ -94,7 +94,7 @@ namespace SchoolAdmin
 
             foreach (var registration in courseRegistrations)
             {
-                Console.WriteLine($"{(registration.Name + ":").PadRight(16)}{registration.Result}");
+                Console.WriteLine($"{(registration.Course.Title + ":").PadRight(16)}{registration.Result}");
             }
 
             Console.WriteLine($"{"Gemiddelde".PadRight(16)}{Average():F1}");

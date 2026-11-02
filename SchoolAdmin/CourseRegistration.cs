@@ -6,11 +6,12 @@ namespace SchoolAdmin
 {
     internal class CourseRegistration
     {
-		private string name;
+		private Cursus course;
 
-		public string Name
+		public Cursus Course
 		{
-			get { return name; }
+			get { return course; }
+            set { course = value; }
 		}
 
 		private byte? result;
@@ -31,9 +32,9 @@ namespace SchoolAdmin
             }
 		}
 
-        public CourseRegistration(string name, byte? result)
+        public CourseRegistration(Cursus course, byte? result)
         {
-            this.name = name;
+            Course = course;
             Result = result;
         }
 

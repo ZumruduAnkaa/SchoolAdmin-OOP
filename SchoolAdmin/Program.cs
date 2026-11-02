@@ -4,50 +4,65 @@
     {
         public static void Main()
         {
-            Console.WriteLine("Wat wil je doen?");
-            Console.WriteLine("1. DemonstreerStudenten uitvoeren");
-            Console.WriteLine("2. DemonstreerCursussen uitvoeren");
-            Console.WriteLine("3. Student uit tekstformaat inlezen");
-            Console.WriteLine("4. DemonstreerCursussen uitvoeren (H3)");
-            Console.Write(">");
-            string keuze = Console.ReadLine();
+            bool doorgaan = true;
 
-            switch (keuze)
+
+            while (doorgaan)
             {
-                case "1":
-                    DemoStudent1();
-                    break;
+                Console.WriteLine("Wat wil je doen?");
+                Console.WriteLine("1. DemonstreerStudenten uitvoeren");
+                Console.WriteLine("2. DemonstreerCursussen uitvoeren");
+                Console.WriteLine("3. Student uit tekstformaat inlezen");
+                Console.WriteLine("4. DemonstreerCursussen uitvoeren (H3)");
+                Console.WriteLine("0. Stoppen");
+                Console.Write(">");
+                string keuze = Console.ReadLine();
 
-                case "2":
-                    DemoCourses();
-                    break;
+                switch (keuze)
+                {
+                    case "1":
+                        DemoStudent1();
+                        break;
 
-                case "3":
-                    ReadTextFormatStudent();
-                    break;
-                case "4":
-                    DemoCourses_H3();
-                    break;
+                    case "2":
+                        DemoCourses();
+                        break;
 
-                default:
-                    Console.WriteLine("Ongeldige keuze");
-                    break;
+                    case "3":
+                        ReadTextFormatStudent();
+                        break;
+                    case "4":
+                        DemoCourses_H3();
+                        break;
+
+                    case "0":
+                        doorgaan = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Ongeldige keuze");
+                        break;
+                }
+                Console.WriteLine();
             }
-
-            
 
         }
 
         private static void DemoStudent1()
         {
+            Cursus communicatie = new Cursus("Communicatie");
+            Cursus programmeren = new Cursus("Programmeren");
+            Cursus webtechnologie = new Cursus("Webtechnologie");
+            Cursus databanken = new Cursus("Databanken");
+
             Student said = new Student();
             said.Name = "Said Aziz";
             said.Birthdate = new DateTime(2000, 6, 1);
             said.StudentNumber = Student.StudentCounter++;
             said.RegisterForCourse("Programmeren");
             said.RegisterForCourse("Databanken");
-            said.RegisterCourseResult("Programmeren", null);   // H13_3
-            said.RegisterCourseResult("Databanken", 12);    // H13_3
+            said.RegisterCourseResult(programmeren, null);   // H13_3
+            said.RegisterCourseResult(databanken, 12);    // H13_3
 
 
             Student mieke = new Student();
@@ -55,7 +70,7 @@
             mieke.Birthdate = new DateTime(1998, 1, 1);
             mieke.StudentNumber = Student.StudentCounter++;
             mieke.RegisterForCourse("Communicatie");
-            mieke.RegisterCourseResult("Communicatie", 14); // H13_3
+            mieke.RegisterCourseResult(communicatie, 14); // H13_3
 
             Console.WriteLine(said.GenerateNameCard());
             Console.WriteLine(said.DetermineWorkLoad());
@@ -127,12 +142,21 @@
             student.Birthdate = new DateTime(year, month, day);
             student.StudentNumber = Student.StudentCounter++;
 
-            //Cursussen
+            //Cursussen - H3_3 SchoolAdmin: gelinkte objecten
             for (int i = 4; i < parts.Length; i += 2)
             {
-                string courseName = parts[i];
+                int courseId = int.Parse(parts[i]);
                 byte result = byte.Parse(parts[i + 1]);
-                student.RegisterCourseResult(courseName, result);
+
+                Cursus? course = Cursus.SearchCourseById(courseId);
+                if (course is not null)
+                {
+                    student.RegisterCourseResult(course, result);
+                }
+                else
+                {
+                    Console.WriteLine($"Cursus met de Id {courseId} bestaat niet.");
+                }
             }
 
             Console.WriteLine();
