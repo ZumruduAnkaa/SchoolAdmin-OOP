@@ -12,7 +12,7 @@ namespace SchoolAdmin
         public uint StudentNumber;
         private List<string> Courses = new List<string>();
 
-        private List<CourseResult> results = new List<CourseResult>();
+        private List<CourseRegistration> courseRegistrations = new List<CourseRegistration>();
 
 
         public static uint StudentCounter = 1;
@@ -55,26 +55,33 @@ namespace SchoolAdmin
         }
 
         //H12_3
-        public void RegisterCourseResult(string name, byte result)
+        public void RegisterCourseResult(string name, byte? result)
         {
-            CourseResult courseResult = new CourseResult(name, result);
-            results.Add(courseResult);
+            CourseRegistration courseRegistration = new CourseRegistration(name, result);
+            courseRegistrations.Add(courseRegistration);
         }
 
-        //H12_4
+        //H12_4 +  H3_1
         public double Average()
         {
-            if (results.Count == 0)
+            double sum = 0;
+            int count = 0;
+
+            foreach (CourseRegistration registration in courseRegistrations)
+            {
+                if (registration.Result != null)
+                {
+                    sum += (double)registration.Result;
+                    count++;
+                }
+            }
+
+            if (count == 0)
             {
                 return 0;
             }
 
-            double sum = 0;
-            foreach (CourseResult result in results)
-            {
-                sum += result.Result;
-            }
-            return sum / results.Count;
+            return sum / count;
         }
 
         //H12_4
@@ -85,9 +92,9 @@ namespace SchoolAdmin
             Console.WriteLine("Cijferrapport:");
             Console.WriteLine("**********");
 
-            foreach (var result in results)
+            foreach (var registration in courseRegistrations)
             {
-                Console.WriteLine($"{(result.Name + ":").PadRight(16)}{result.Result}");
+                Console.WriteLine($"{(registration.Name + ":").PadRight(16)}{registration.Result}");
             }
 
             Console.WriteLine($"{"Gemiddelde".PadRight(16)}{Average():F1}");

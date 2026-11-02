@@ -42,7 +42,7 @@
             said.StudentNumber = Student.StudentCounter++;
             said.RegisterForCourse("Programmeren");
             said.RegisterForCourse("Databanken");
-            said.RegisterCourseResult("Programmeren", 15);   // H13_3
+            said.RegisterCourseResult("Programmeren", null);   // H13_3
             said.RegisterCourseResult("Databanken", 12);    // H13_3
 
 
@@ -58,6 +58,7 @@
 
             Console.WriteLine(mieke.GenerateNameCard());
             Console.WriteLine(mieke.DetermineWorkLoad());
+
         }
 
         // H12_2

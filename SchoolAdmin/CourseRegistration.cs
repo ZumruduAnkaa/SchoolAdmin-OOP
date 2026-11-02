@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SchoolAdmin
 {
-    internal class CourseResult
+    internal class CourseRegistration
     {
 		private string name;
 
@@ -13,14 +13,14 @@ namespace SchoolAdmin
 			get { return name; }
 		}
 
-		private byte result;
+		private byte? result;
 
-		public byte Result
+		public byte? Result
 		{
 			get { return result; }
 			set 
 			{
-                if (value > 20)
+                if (value != null &&value > 20)
                 {
 					Console.WriteLine("Fout!");
                 }
@@ -31,7 +31,7 @@ namespace SchoolAdmin
             }
 		}
 
-        public CourseResult(string name, byte result)
+        public CourseRegistration(string name, byte? result)
         {
             this.name = name;
             Result = result;
