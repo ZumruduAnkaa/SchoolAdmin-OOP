@@ -57,6 +57,20 @@ namespace SchoolAdmin
             }
         }
 
+        //H3_2
+        public static Cursus? SearchCourseById(int id)
+        {
+            foreach (Cursus course in AllCourses)
+            {
+                if (course.id == id)
+                {
+                    return course;
+                }
+            }
+
+            return null;
+        }
+
 
     }
 }

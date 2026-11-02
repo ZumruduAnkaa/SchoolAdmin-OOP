@@ -8,6 +8,7 @@
             Console.WriteLine("1. DemonstreerStudenten uitvoeren");
             Console.WriteLine("2. DemonstreerCursussen uitvoeren");
             Console.WriteLine("3. Student uit tekstformaat inlezen");
+            Console.WriteLine("4. DemonstreerCursussen uitvoeren (H3)");
             Console.Write(">");
             string keuze = Console.ReadLine();
 
@@ -23,6 +24,9 @@
 
                 case "3":
                     ReadTextFormatStudent();
+                    break;
+                case "4":
+                    DemoCourses_H3();
                     break;
 
                 default:
@@ -134,6 +138,53 @@
             Console.WriteLine();
             student.ShowOverview();
 
+        }
+
+        private static void DemoCourses_H3()
+        {
+            // studenten maken
+            Student said = new Student();
+            said.Name = "Said Aziz";
+            said.Birthdate = new DateTime(2000, 6, 1);
+            said.StudentNumber = Student.StudentCounter++;
+
+            Student mieke = new Student();
+            mieke.Name = "Mieke Vermeulen";
+            mieke.Birthdate = new DateTime(1998, 1, 1);
+            mieke.StudentNumber = Student.StudentCounter++;
+
+            // lijst van studenten maken
+            List<Student> studenten = new List<Student>();
+            studenten.Add(said);
+            studenten.Add(mieke);
+
+            // 6 studiepunten (constructor 1)
+            Cursus communicatie = new Cursus("Communicatie", studenten, 6);
+
+            // 3 studiepunten (constructor 2)
+            Cursus programmeren = new Cursus("Programmeren", studenten);
+
+            // enkel de titel (constructor 3)
+            Cursus webtechnologie = new Cursus("Webtechnologie");
+            Cursus databanken = new Cursus("Databanken");
+
+            // Said bij webtechnologie en Mieke bij databanken
+            webtechnologie.Students.Add(said);
+            databanken.Students.Add(mieke);
+
+
+            Cursus? gevonden = Cursus.SearchCourseById(2);
+            if (gevonden is null)
+            {
+                Console.WriteLine("Cursus niet gevonden");
+            }
+            else
+            {
+                gevonden.ShowOverview();
+            }
+
+            Cursus? nietBestaand = Cursus.SearchCourseById(99);
+            Console.WriteLine(nietBestaand is null ? "99 is geen cursus" : "fout");
         }
     }
 }
