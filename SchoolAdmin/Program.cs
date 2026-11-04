@@ -217,21 +217,29 @@
             Console.WriteLine(nietBestaand is null ? "99 is geen cursus" : "fout");
         }
 
+        //H3_4 + H3_5
         private static void DemoStudyProgram()
         {
             Course communicatie = new Course("Communicatie");
             Course programmeren = new Course("Programmeren");
             Course databanken = new Course("Databanken");
 
-            List<Course> courses = new List<Course>() { communicatie, programmeren, databanken };
+            List<Course> coursesProgrammeren = new List<Course>() { communicatie, programmeren, databanken };
+            List<Course> CoursesSNB = new List<Course>() { communicatie, programmeren, databanken };
+
+            Course programmerenSNB = new Course("Programmeren");
+            CoursesSNB[1] = programmerenSNB;
 
             StudyProgram programmerenProgram = new StudyProgram("Programmeren");
             StudyProgram snbProgram = new StudyProgram("Systeem- en netwerkbeheer");
 
-            programmerenProgram.Courses = courses;
-            snbProgram.Courses = courses;
+            programmerenProgram.Courses = coursesProgrammeren;
+            snbProgram.Courses = CoursesSNB;
 
             snbProgram.Courses.Remove(databanken);
+
+            snbProgram.Courses[1].Title = "Scripting";
+
             programmerenProgram.ShowOverview();
             snbProgram.ShowOverview();
         }
