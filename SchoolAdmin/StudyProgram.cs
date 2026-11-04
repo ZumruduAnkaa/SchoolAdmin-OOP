@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Text;
 
 namespace SchoolAdmin
@@ -13,7 +14,13 @@ namespace SchoolAdmin
             get { return name; }
         }
 
-        public List<Course> Courses = new List<Course>();
+        private List<Course> courses = new List<Course>();
+
+        public ImmutableList<Course> Courses
+        {
+            get { return courses.ToImmutableList<Course>(); }
+            set { courses = value.ToList<Course>(); }
+        }
 
         public StudyProgram(string name)
         {

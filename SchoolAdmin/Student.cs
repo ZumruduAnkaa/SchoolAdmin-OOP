@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Formats.Asn1;
 using System.Text;
 
@@ -17,6 +18,12 @@ namespace SchoolAdmin
 
         public static uint StudentCounter = 1;
 
+        public static ImmutableList<Student> AllStudents { get; private set; } = ImmutableList<Student>.Empty;
+
+        public Student()
+        {
+            AllStudents = AllStudents.Add(this);
+        }
 
         public int Age
         {

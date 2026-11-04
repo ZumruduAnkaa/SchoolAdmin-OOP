@@ -1,4 +1,6 @@
-﻿namespace SchoolAdmin
+﻿using System.Collections.Immutable;
+
+namespace SchoolAdmin
 {
     internal class Program
     {
@@ -84,6 +86,7 @@
             Console.WriteLine(mieke.GenerateNameCard());
             Console.WriteLine(mieke.DetermineWorkLoad());
 
+            Console.WriteLine($"Aantal studenten: {Student.AllStudents.Count}");
         }
 
         // H12_2
@@ -217,7 +220,7 @@
             Console.WriteLine(nietBestaand is null ? "99 is geen cursus" : "fout");
         }
 
-        //H3_4 + H3_5
+        //H3_4 + H3_5 + H4_2
         private static void DemoStudyProgram()
         {
             Course communicatie = new Course("Communicatie");
@@ -233,10 +236,10 @@
             StudyProgram programmerenProgram = new StudyProgram("Programmeren");
             StudyProgram snbProgram = new StudyProgram("Systeem- en netwerkbeheer");
 
-            programmerenProgram.Courses = coursesProgrammeren;
-            snbProgram.Courses = CoursesSNB;
+            programmerenProgram.Courses = coursesProgrammeren.ToImmutableList();
+            snbProgram.Courses = CoursesSNB.ToImmutableList();
 
-            snbProgram.Courses.Remove(databanken);
+            snbProgram.Courses = snbProgram.Courses.Remove(databanken);
 
             snbProgram.Courses[1].Title = "Scripting";
 
