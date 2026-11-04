@@ -6,9 +6,9 @@ namespace SchoolAdmin
 {
     internal class CourseRegistration
     {
-		private Cursus course;
+		private Course course;
 
-		public Cursus Course
+		public Course Course
 		{
 			get { return course; }
             set { course = value; }
@@ -32,7 +32,7 @@ namespace SchoolAdmin
             }
 		}
 
-        public CourseRegistration(Cursus course, byte? result)
+        public CourseRegistration(Course course, byte? result)
         {
             Course = course;
             Result = result;

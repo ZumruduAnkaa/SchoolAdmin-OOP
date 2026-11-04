@@ -14,6 +14,7 @@
                 Console.WriteLine("2. DemonstreerCursussen uitvoeren");
                 Console.WriteLine("3. Student uit tekstformaat inlezen");
                 Console.WriteLine("4. DemonstreerCursussen uitvoeren (H3)");
+                Console.WriteLine("5. DemonstreerStudieprogramma uitvoeren (H3_4)");
                 Console.WriteLine("0. Stoppen");
                 Console.Write(">");
                 string keuze = Console.ReadLine();
@@ -31,8 +32,13 @@
                     case "3":
                         ReadTextFormatStudent();
                         break;
+
                     case "4":
                         DemoCourses_H3();
+                        break;
+
+                    case "5":
+                        DemoStudyProgram();
                         break;
 
                     case "0":
@@ -50,10 +56,10 @@
 
         private static void DemoStudent1()
         {
-            Cursus communicatie = new Cursus("Communicatie");
-            Cursus programmeren = new Cursus("Programmeren");
-            Cursus webtechnologie = new Cursus("Webtechnologie");
-            Cursus databanken = new Cursus("Databanken");
+            Course communicatie = new Course("Communicatie");
+            Course programmeren = new Course("Programmeren");
+            Course webtechnologie = new Course("Webtechnologie");
+            Course databanken = new Course("Databanken");
 
             Student said = new Student();
             said.Name = "Said Aziz";
@@ -100,14 +106,14 @@
             studenten.Add(mieke);
 
             // 6 studiepunten (constructor 1)
-            Cursus communicatie = new Cursus("Communicatie", studenten, 6);
+            Course communicatie = new Course("Communicatie", studenten, 6);
 
             // 3 studiepunten (constructor 2)
-            Cursus programmeren = new Cursus("Programmeren", studenten);
+            Course programmeren = new Course("Programmeren", studenten);
 
             // enkel de titel (constructor 3)
-            Cursus webtechnologie = new Cursus("Webtechnologie");
-            Cursus databanken = new Cursus("Databanken");
+            Course webtechnologie = new Course("Webtechnologie");
+            Course databanken = new Course("Databanken");
 
             // Said bij webtechnologie en Mieke bij databanken
             webtechnologie.Students.Add(said);
@@ -148,7 +154,7 @@
                 int courseId = int.Parse(parts[i]);
                 byte result = byte.Parse(parts[i + 1]);
 
-                Cursus? course = Cursus.SearchCourseById(courseId);
+                Course? course = Course.SearchCourseById(courseId);
                 if (course is not null)
                 {
                     student.RegisterCourseResult(course, result);
@@ -183,21 +189,21 @@
             studenten.Add(mieke);
 
             // 6 studiepunten (constructor 1)
-            Cursus communicatie = new Cursus("Communicatie", studenten, 6);
+            Course communicatie = new Course("Communicatie", studenten, 6);
 
             // 3 studiepunten (constructor 2)
-            Cursus programmeren = new Cursus("Programmeren", studenten);
+            Course programmeren = new Course("Programmeren", studenten);
 
             // enkel de titel (constructor 3)
-            Cursus webtechnologie = new Cursus("Webtechnologie");
-            Cursus databanken = new Cursus("Databanken");
+            Course webtechnologie = new Course("Webtechnologie");
+            Course databanken = new Course("Databanken");
 
             // Said bij webtechnologie en Mieke bij databanken
             webtechnologie.Students.Add(said);
             databanken.Students.Add(mieke);
 
 
-            Cursus? gevonden = Cursus.SearchCourseById(2);
+            Course? gevonden = Course.SearchCourseById(2);
             if (gevonden is null)
             {
                 Console.WriteLine("Cursus niet gevonden");
@@ -207,8 +213,27 @@
                 gevonden.ShowOverview();
             }
 
-            Cursus? nietBestaand = Cursus.SearchCourseById(99);
+            Course? nietBestaand = Course.SearchCourseById(99);
             Console.WriteLine(nietBestaand is null ? "99 is geen cursus" : "fout");
+        }
+
+        private static void DemoStudyProgram()
+        {
+            Course communicatie = new Course("Communicatie");
+            Course programmeren = new Course("Programmeren");
+            Course databanken = new Course("Databanken");
+
+            List<Course> courses = new List<Course>() { communicatie, programmeren, databanken };
+
+            StudyProgram programmerenProgram = new StudyProgram("Programmeren");
+            StudyProgram snbProgram = new StudyProgram("Systeem- en netwerkbeheer");
+
+            programmerenProgram.Courses = courses;
+            snbProgram.Courses = courses;
+
+            snbProgram.Courses.Remove(databanken);
+            programmerenProgram.ShowOverview();
+            snbProgram.ShowOverview();
         }
     }
 }

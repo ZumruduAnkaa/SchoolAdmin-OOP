@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SchoolAdmin
 {
-    public class Cursus
+    public class Course
     {
         public string Title;
         public List<Student> Students;
@@ -25,10 +25,10 @@ namespace SchoolAdmin
 
         private static int maxId = 1;
 
-        public static List<Cursus> AllCourses = new List<Cursus>();
+        public static List<Course> AllCourses = new List<Course>();
 
         // H12_2
-        public Cursus(string title, List<Student> students, byte creditPoints)
+        public Course(string title, List<Student> students, byte creditPoints)
         {
             Title = title;
             Students = students;
@@ -40,11 +40,11 @@ namespace SchoolAdmin
             AllCourses.Add(this);
         }
 
-        public Cursus(string title, List<Student> students) : this(title, students, 3)
+        public Course(string title, List<Student> students) : this(title, students, 3)
         {
         }
 
-        public Cursus(string title) : this(title, new List<Student>())
+        public Course(string title) : this(title, new List<Student>())
         {
         }
 
@@ -58,9 +58,9 @@ namespace SchoolAdmin
         }
 
         //H3_2
-        public static Cursus? SearchCourseById(int id)
+        public static Course? SearchCourseById(int id)
         {
-            foreach (Cursus course in AllCourses)
+            foreach (Course course in AllCourses)
             {
                 if (course.id == id)
                 {

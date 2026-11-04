@@ -55,7 +55,7 @@ namespace SchoolAdmin
         }
 
         //H12_3
-        public void RegisterCourseResult(Cursus course, byte? result)
+        public void RegisterCourseResult(Course course, byte? result)
         {
             CourseRegistration courseRegistration = new CourseRegistration(course, result);
             courseRegistrations.Add(courseRegistration);
